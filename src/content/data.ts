@@ -10,7 +10,7 @@ export const site = {
   taglineSecondary: "Construindo um belo futuro.",
   description:
     "Alfredo do Belo 1001 — candidato a Deputado Federal pelo Rio de Janeiro. Cultura que move. Gente que transforma.",
-  url: "https://apoie.alfredodobelo.com.br",
+  url: "https://www.alfredodobelo.com.br",
   ogImage: "/campanha/hero-desktop.jpg",
   email: "contato@alfredodobelo.com.br",
   phone: "+55 (21) 0000-0000",

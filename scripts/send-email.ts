@@ -116,7 +116,7 @@ async function main() {
         firstName: nome,
         assetsBaseUrl:
           process.env.NEXT_PUBLIC_ASSETS_BASE_URL ||
-          "https://apoie.alfredodobelo.com.br",
+          "https://www.alfredodobelo.com.br",
       }),
     );
 
@@ -178,7 +178,7 @@ async function main() {
             firstName: c.nome,
             assetsBaseUrl:
               process.env.NEXT_PUBLIC_ASSETS_BASE_URL ||
-              "https://apoie.alfredodobelo.com.br",
+              "https://www.alfredodobelo.com.br",
           }),
         ),
       })),

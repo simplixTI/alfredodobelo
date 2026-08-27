@@ -23,7 +23,7 @@ export interface AlfredoDoBeloEmailProps {
 
 const DEFAULT_ASSETS_BASE =
   process.env.NEXT_PUBLIC_ASSETS_BASE_URL ||
-  "https://apoie.alfredodobelo.com.br";
+  "https://www.alfredodobelo.com.br";
 const DEFAULT_SUPPORT_URL =
   "https://www.alfredodobelo.com.br/campanha/alfredo-do-belo";
 const DEFAULT_REEL_URL = "https://www.instagram.com/reel/DcToAYmR3J8/";
