@@ -47,6 +47,7 @@ const LIMIT = parseInt(flag("limit") || "0", 10);
 const OFFSET = parseInt(flag("offset") || "0", 10);
 const SINGLE_TO = flag("to");
 const DRY = has("dry-run");
+const YES = has("yes");
 
 // ---------- Config Resend ----------
 const RESEND_API_KEY = process.env.RESEND_API_KEY;
@@ -78,7 +79,9 @@ async function log(line: string) {
 type Contact = { email: string; nome: string };
 
 async function loadCsv(): Promise<Contact[]> {
-  const raw = await fs.readFile(CSV_PATH, "utf-8");
+  let raw = await fs.readFile(CSV_PATH, "utf-8");
+  // Remove BOM UTF-8 se presente (\uFEFF)
+  if (raw.charCodeAt(0) === 0xfeff) raw = raw.slice(1);
   const lines = raw.split(/\r?\n/).filter(Boolean);
   const header = lines.shift();
   if (!header || !header.toLowerCase().startsWith("email")) {
@@ -147,7 +150,7 @@ async function main() {
     `CSV: ${CSV_PATH} · total ${all.length} · offset ${OFFSET} · limit ${LIMIT || "TODOS"} · fila ${sliced.length}`,
   );
 
-  if (!DRY) {
+  if (!DRY && !YES) {
     const ok = await confirm(
       `Vou enviar para ${sliced.length} contatos AGORA. Confirmar?`,
     );
@@ -155,6 +158,8 @@ async function main() {
       await log("Abortado pelo usuário.");
       return;
     }
+  } else if (YES) {
+    await log(`[AUTO] --yes ativo, pulando confirma\u00e7\u00e3o interativa.`);
   }
 
   // Batch endpoint: até 100 por chamada
