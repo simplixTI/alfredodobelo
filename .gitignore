@@ -1,0 +1,22 @@
+node_modules
+.next
+out
+.env
+.env.local
+.env.*.local
+.DS_Store
+*.tsbuildinfo
+next-env.d.ts
+.vercel
+
+# Dados sensíveis (LGPD) — base de contatos, planilhas, exportações
+referencia/contatos*.csv
+referencia/contatos*.xlsx
+referencia/*.csv
+referencia/*.xlsx
+referencia/*.bak
+*.csv.bak
+
+# Logs de disparo (contém emails processados)
+logs/
+

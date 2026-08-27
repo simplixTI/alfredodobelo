@@ -1,0 +1,173 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg: 251 237 217;         /* brand-cream */
+  --bg-light: 255 247 232;   /* brand-cream-light */
+  --ink: 15 20 32;
+  --navy: 30 42 68;
+  --orange: 242 101 34;
+  --orange-deep: 220 78 18;
+  --yellow: 245 180 23;
+  --yellow-light: 252 196 25;
+}
+
+html,
+body {
+  background-color: rgb(var(--bg-light));
+  color: rgb(var(--ink));
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: rgb(var(--orange) / 0.9);
+  color: white;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+html::-webkit-scrollbar { width: 10px; }
+html::-webkit-scrollbar-track { background: rgb(var(--bg)); }
+html::-webkit-scrollbar-thumb { background: rgb(var(--orange) / 0.55); border-radius: 999px; }
+html::-webkit-scrollbar-thumb:hover { background: rgb(var(--orange)); }
+
+:where(a, button, input, textarea, select, [role="button"]):focus-visible {
+  outline: 2px solid rgb(var(--orange));
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+.font-display {
+  letter-spacing: -0.01em;
+}
+
+.text-balance { text-wrap: balance; }
+.text-pretty { text-wrap: pretty; }
+
+/* --------- Pinceladas SVG reutilizáveis ---------- */
+.brush-underline {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 20' preserveAspectRatio='none'%3E%3Cpath d='M4 12 C 60 4, 120 18, 180 8 S 280 4, 296 10 L 296 16 C 240 10, 160 20, 100 14 S 20 18, 4 16 Z' fill='%23F26522'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: bottom;
+  background-size: 100% 0.35em;
+  padding-bottom: 0.15em;
+}
+
+.brush-highlight-orange {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 60' preserveAspectRatio='none'%3E%3Cpath d='M10 8 C 80 2, 180 14, 290 6 L 285 54 C 200 60, 100 46, 8 54 Z' fill='%23F26522'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 100% 100%;
+}
+
+.brush-highlight-yellow {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 60' preserveAspectRatio='none'%3E%3Cpath d='M10 8 C 80 2, 180 14, 290 6 L 285 54 C 200 60, 100 46, 8 54 Z' fill='%23F5B417'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 100% 100%;
+}
+
+/* Spark 4-pontas — usado em vários lugares */
+.spark::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 0 L14 10 L24 12 L14 14 L12 24 L10 14 L0 12 L10 10 Z' fill='%23F5B417'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+@layer components {
+  .container-wide {
+    @apply mx-auto w-full max-w-[1240px] px-6 md:px-10;
+  }
+
+  .eyebrow {
+    @apply inline-flex items-center gap-3 text-[11px] font-semibold uppercase tracking-[0.28em] text-brand-orange-deep;
+  }
+
+  /* ---------- Botões ---------- */
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-full bg-brand-orange px-7 py-3.5 text-sm font-bold uppercase tracking-[0.08em] text-white transition-all duration-300 hover:bg-brand-orange-deep hover:shadow-pop focus:outline-none;
+  }
+  .btn-yellow {
+    @apply inline-flex items-center justify-center gap-2 rounded-full bg-brand-yellow px-7 py-3.5 text-sm font-bold uppercase tracking-[0.08em] text-brand-navy transition-all duration-300 hover:bg-brand-yellow-light hover:shadow-yellow focus:outline-none;
+  }
+  .btn-outline {
+    @apply inline-flex items-center justify-center gap-2 rounded-full border-2 border-brand-orange bg-transparent px-6 py-3 text-sm font-bold uppercase tracking-[0.08em] text-brand-orange transition-all duration-300 hover:bg-brand-orange hover:text-white;
+  }
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-2 rounded-full border border-brand-navy/15 bg-transparent px-6 py-3 text-sm font-medium tracking-crisp text-brand-navy transition-all duration-300 hover:border-brand-navy/40 hover:bg-brand-navy/5;
+  }
+  .btn-gold {
+    @apply btn-yellow;
+  }
+
+  .rule {
+    @apply block h-[3px] w-12 bg-brand-orange;
+  }
+  .card-editorial {
+    @apply rounded-2xl border border-brand-navy/10 bg-white p-8 shadow-card transition-all duration-500;
+  }
+
+  /* Números "1001" gigantes */
+  .num-1001 {
+    font-family: var(--font-anton), Impact, sans-serif;
+    font-weight: 400;
+    letter-spacing: -0.03em;
+    line-height: 0.85;
+  }
+
+  /* Pill superior da arte "DEPUTADO ✦ FEDERAL" */
+  .pill-deputy {
+    @apply inline-flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.32em] text-brand-orange-deep;
+  }
+  .pill-deputy::before,
+  .pill-deputy::after {
+    content: "✦";
+    color: #F5B417;
+  }
+
+  /* Selo eleitoral vertical (obrigatório TSE) */
+  .selo-eleitoral {
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    letter-spacing: 0.22em;
+    font-size: 10px;
+    font-weight: 500;
+    color: rgb(var(--navy) / 0.55);
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+}
+
+/* Halftone pattern reutilizável */
+.dots-orange {
+  background-image: radial-gradient(circle at 1px 1px, rgba(242,101,34,0.4) 1.2px, transparent 1.5px);
+  background-size: 14px 14px;
+}
+.dots-yellow {
+  background-image: radial-gradient(circle at 1px 1px, rgba(245,180,23,0.5) 1.2px, transparent 1.5px);
+  background-size: 14px 14px;
+}
+
+/* Skyline vetorizado do Rio de Janeiro — Cristo, Pão de Açúcar, Corcovado, bondinho */
+.rio-skyline {
+  background-image: url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1400 400' preserveAspectRatio='xMidYMax slice'%3E%3Cg fill='none' stroke='%23F26522' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' opacity='0.9'%3E%3C!-- Morro Pao de Acucar (esquerda) --%3E%3Cpath d='M60 400 C 80 340, 120 280, 160 250 C 200 220, 240 210, 280 260 C 300 300, 310 360, 320 400 Z'/%3E%3C!-- Bondinho cable --%3E%3Cline x1='240' y1='230' x2='560' y2='120'/%3E%3C!-- Cabine bondinho --%3E%3Crect x='380' y='170' width='22' height='14' rx='2'/%3E%3Cline x1='391' y1='168' x2='391' y2='158'/%3E%3C!-- Morro Urca --%3E%3Cpath d='M280 400 C 320 350, 360 320, 400 340 C 430 355, 440 380, 450 400 Z'/%3E%3C!-- Morro Corcovado --%3E%3Cpath d='M560 400 C 600 320, 660 220, 720 180 C 780 220, 820 300, 860 400 Z'/%3E%3C!-- Cristo Redentor --%3E%3Cline x1='720' y1='180' x2='720' y2='140'/%3E%3Cline x1='700' y1='158' x2='740' y2='158'/%3E%3Ccircle cx='720' cy='134' r='4'/%3E%3C!-- Palmeira direita --%3E%3Cline x1='980' y1='400' x2='980' y2='300'/%3E%3Cpath d='M980 300 Q 960 280 940 285 M980 300 Q 960 290 945 302 M980 300 Q 1000 280 1020 285 M980 300 Q 1000 290 1015 302 M980 300 Q 980 275 985 265 M980 300 Q 980 275 975 265'/%3E%3C!-- Arcos da Lapa (direita) --%3E%3Cpath d='M1080 400 L 1080 340 L 1120 340 L 1120 400 M 1100 340 Q 1100 320 1120 320 M 1120 340 L 1160 340 L 1160 400 M 1140 340 Q 1140 320 1160 320 M 1160 340 L 1200 340 L 1200 400 M 1180 340 Q 1180 320 1200 320 M 1200 340 L 1240 340 L 1240 400'/%3E%3C!-- Ondas sutis no baixo --%3E%3Cpath d='M0 385 Q 100 380 200 385 T 400 385 T 600 385 T 800 385 T 1000 385 T 1200 385 T 1400 385' opacity='0.5'/%3E%3C/g%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: bottom center;
+  background-size: 100% auto;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  * {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
+}
